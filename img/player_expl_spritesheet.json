@@ -1,0 +1,195 @@
+{
+	"frames": {
+		"sonicExplosion00.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 192,
+				"h": 192
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 192,
+				"h": 192
+			},
+			"sourceSize": {
+				"w": 192,
+				"h": 192
+			}
+		},
+		"sonicExplosion01.png": {
+			"frame": {
+				"x": 195,
+				"y": 1,
+				"w": 152,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 152,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 152,
+				"h": 150
+			}
+		},
+		"sonicExplosion02.png": {
+			"frame": {
+				"x": 195,
+				"y": 153,
+				"w": 190,
+				"h": 190
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 190,
+				"h": 190
+			},
+			"sourceSize": {
+				"w": 190,
+				"h": 190
+			}
+		},
+		"sonicExplosion03.png": {
+			"frame": {
+				"x": 387,
+				"y": 1,
+				"w": 284,
+				"h": 284
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 284,
+				"h": 284
+			},
+			"sourceSize": {
+				"w": 284,
+				"h": 284
+			}
+		},
+		"sonicExplosion04.png": {
+			"frame": {
+				"x": 673,
+				"y": 1,
+				"w": 120,
+				"h": 124
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 120,
+				"h": 124
+			},
+			"sourceSize": {
+				"w": 120,
+				"h": 124
+			}
+		},
+		"sonicExplosion05.png": {
+			"frame": {
+				"x": 673,
+				"y": 127,
+				"w": 133,
+				"h": 134
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 133,
+				"h": 134
+			},
+			"sourceSize": {
+				"w": 133,
+				"h": 134
+			}
+		},
+		"sonicExplosion06.png": {
+			"frame": {
+				"x": 1,
+				"y": 263,
+				"w": 138,
+				"h": 140
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 138,
+				"h": 140
+			},
+			"sourceSize": {
+				"w": 138,
+				"h": 140
+			}
+		},
+		"sonicExplosion07.png": {
+			"frame": {
+				"x": 387,
+				"y": 287,
+				"w": 143,
+				"h": 144
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 143,
+				"h": 144
+			},
+			"sourceSize": {
+				"w": 143,
+				"h": 144
+			}
+		},
+		"sonicExplosion08.png": {
+			"frame": {
+				"x": 532,
+				"y": 287,
+				"w": 149,
+				"h": 151
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 149,
+				"h": 151
+			},
+			"sourceSize": {
+				"w": 149,
+				"h": 151
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 807,
+			"h": 439
+		},
+		"scale": "1"
+	}
+}
