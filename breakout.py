@@ -82,6 +82,8 @@ class Game:
 
 
     def new(self):
+        self.IS_AUTO = False
+
         self.score = 0
 
         self.all_sprites = pg.sprite.Group()
@@ -107,7 +109,7 @@ class Game:
         while self.playing:
             self.clock.tick(FPS)
             self.update()
-            # self.auto_pilot()
+            self.auto_pilot(self.IS_AUTO)
 
     def update(self):
         self.events()
@@ -127,6 +129,24 @@ class Game:
         # Winning Checks...
         if len(self.bricks) <= 0:
             self.playing = False
+
+    def events(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT or event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+                self.running = False
+                self.playing = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_KP1:
+                    self.player.start_safety_line()
+                if event.key == pg.K_KP2:
+                    self.player.multi_ball()
+                if event.key == pg.K_KP0:
+                    for b in self.balls:
+                        b.kill()
+                        Ball(self)
+
+                if event.key == pg.K_a:
+                    self.IS_AUTO = not self.IS_AUTO
 
     def initialize_bricks(self):
         brick_x = 10
@@ -165,24 +185,20 @@ class Game:
                 # player&ball moving right
                 if self.player.speedx > 0 and ball.speedx > 0:
                     ball.speedx *= 1.5
-                    print("1")
                     if ball.speedx > 15:
                         ball.speedx = 15
                 # player&ball moving left
                 elif self.player.speedx < 0 and ball.speedx < 0:
                     ball.speedx *= 1.5
-                    print("2")
                     if ball.speedx < -15:
                         ball.speedx = -15
 
                 # player moving right & ball moving left
                 elif self.player.speedx > 0 and ball.speedx < 0:
-                    print("3")
                     ball.speedx *= -1
 
                 # player moving left & ball moving right
                 elif self.player.speedx < 0 and ball.speedx > 0:
-                    print("4")
                     ball.speedx *= -1
 
                 ball.speedy *= -1
@@ -242,21 +258,6 @@ class Game:
             hit.rect.y = 20
             Explosion(self, hit)
 
-    def events(self):
-        for event in pg.event.get():
-            if event.type == pg.QUIT or event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
-                self.running = False
-                self.playing = False
-            # if event.type == pg.KEYDOWN:
-            #     if event.key == pg.K_a:
-            #         self.player.start_safety_line()
-            #     if event.key == pg.K_UP:
-            #         self.player.multi_ball()
-            #     if event.key == pg.K_SPACE:
-            #         for i in self.balls:
-            #             i.speedx = 0
-            #             i.speedy = 0
-
     def draw(self):
         pg.display.flip()
         self.screen.fill(BLACK)
@@ -289,33 +290,34 @@ class Game:
         #     self.player.move_left()
 
     # Auto-pilot function than follows the lowest ball
-    def auto_pilot(self):
-        # Follow balls if the safe_line isn't active
-        # Follow Collectables if safe_line active
-        
-        if not self.player.safety_line_active:
-            lowest = list(self.balls)[0]
-            for ball in self.balls:
-                if ball.speedy > 0:  # Make sure the lowest is going down..
-                    if ball.rect.y > lowest.rect.y:
-                        lowest = ball
+    def auto_pilot(self, is_auto):
+        if is_auto:
+            # Follow balls if the safe_line isn't active
+            # Follow Collectables if safe_line active
+            
+            if not self.player.safety_line_active:
+                lowest = list(self.balls)[0]
+                for ball in self.balls:
+                    if ball.speedy > 0:  # Make sure the lowest is going down..
+                        if ball.rect.y > lowest.rect.y:
+                            lowest = ball
 
-            if self.player.rect.centerx + 10 < lowest.rect.centerx:
-                self.player.move_right()
+                if self.player.rect.centerx + 10 < lowest.rect.centerx:
+                    self.player.move_right()
 
-            if self.player.rect.centerx - 10 > lowest.rect.centerx:
-                self.player.move_left()
-        else:
-            if len(self.collectables):
-                for c in self.collectables:
-                    lowest = list(self.collectables)[0]
+                if self.player.rect.centerx - 10 > lowest.rect.centerx:
+                    self.player.move_left()
+            else:
+                if len(self.collectables):
+                    for c in self.collectables:
+                        lowest = list(self.collectables)[0]
 
-                    if c.rect.y > lowest.rect.y:
-                        lowest = c
-                    if self.player.rect.centerx < lowest.rect.centerx:
-                        self.player.move_right()
-                    if self.player.rect.centerx > lowest.rect.centerx:
-                        self.player.move_left()
+                        if c.rect.y > lowest.rect.y:
+                            lowest = c
+                        if self.player.rect.centerx < lowest.rect.centerx:
+                            self.player.move_right()
+                        if self.player.rect.centerx > lowest.rect.centerx:
+                            self.player.move_left()
 
 
     def find_distance(self, obj_1, obj_2):

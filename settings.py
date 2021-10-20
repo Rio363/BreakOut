@@ -20,7 +20,7 @@ BALL_SIZE = 20
 COLLECTABLE_TYPES = ["multi_ball", "safety_line", 
 					"become_bigger", "become_smaller",
                      ] 
-# "glue_ball" "slower" "faster" "player_gun"
+# "glue_ball" "slower" "faster" "player_gun" "shield"
 # glue-ball makes the ball stick to player
 COLLECTABLE_SIZE = (80, 25)
 COLLECTABLE_SPAWN_PCT = 0.1
