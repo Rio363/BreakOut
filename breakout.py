@@ -80,6 +80,21 @@ class Game:
         ]
         self.brick_expl_lst = [pg.transform.scale(img, (img.get_rect().w, img.get_rect().h)) for img in self.brick_expl_lst]
 
+        # Sounds....
+        self.snd_dir = path.join(path.dirname(__file__), "snds")
+
+        self.expl_snd = self.load_sound("BrickExpl.wav")
+        self.game_over_snd = self.load_sound("gameover.wav")
+        self.rock_drop_snd = self.load_sound("Rock_Drop.wav")
+        self.ball_bounce_off_player_snd = self.load_sound("Ball_bounce_off_player.wav")
+        self.ball_bounce_snd = self.load_sound("Ball_bounce.wav")
+        self.multi_ball_snd = self.load_sound("multi_ball.wav")
+
+
+    def load_sound(self, snd_name, vol=1):
+        snd = pg.mixer.Sound(path.join(self.snd_dir, snd_name))
+        snd.set_volume(vol)
+        return snd
 
     def new(self):
         self.IS_AUTO = False
@@ -121,6 +136,8 @@ class Game:
         if len(self.balls) <= 0:
             self.player.lives -= 1
             Ball(self)
+            self.game_over_snd.play()
+
             self.player.back_to_normal_size()
 
         if self.player.lives <= 0:
@@ -202,6 +219,7 @@ class Game:
                     ball.speedx *= -1
 
                 ball.speedy *= -1
+                self.ball_bounce_off_player_snd.play()
 
         # Ball/Bricks...
         for ball in self.balls:
@@ -232,8 +250,10 @@ class Game:
                     # Drop Rock...
                     if random.random() > ROCK_DROP_PCT:
                         Rock(self, hit)
+                        self.rock_drop_snd.play()
 
                     Explosion(self, hit)
+                    self.expl_snd.play()
 
     def pow_collector(self):
         hits = pg.sprite.spritecollide(self.player, self.collectables, True)
@@ -243,6 +263,7 @@ class Game:
                     self.player.start_safety_line()
                 elif hit.collectable_type == "multi_ball":
                     self.player.multi_ball()
+                    self.multi_ball_snd.play()
                 elif hit.collectable_type == "become_bigger":
                     self.player.become_bigger()
                 elif hit.collectable_type == "become_smaller":

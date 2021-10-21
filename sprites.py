@@ -146,12 +146,15 @@ class Ball(pg.sprite.Sprite):
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH - 10 # so It would never stick to sides
             self.speedx *= -1
+            self.game_obj.ball_bounce_snd.play()
         elif self.rect.left < 0:
             self.rect.left = 10
             self.speedx *= -1
+            self.game_obj.ball_bounce_snd.play()
         if self.rect.top < 50: # 50 is the space over the bricks defined in breakout.py initialize_bricks()
             self.rect.top = 60
             self.speedy *= -1
+            self.game_obj.ball_bounce_snd.play()
 
         # Kill ball if safety_line is not active or bounce
         if self.game_obj.player.safety_line_active:
