@@ -87,9 +87,9 @@ class Game:
         self.game_over_snd = self.load_sound("gameover.wav")
         self.rock_drop_snd = self.load_sound("Rock_Drop.wav")
         self.ball_bounce_off_player_snd = self.load_sound("Ball_bounce_off_player.wav")
-        self.ball_bounce_snd = self.load_sound("Ball_bounce.wav")
+        self.ball_bounce_snd = self.ball_bounce_off_player_snd
         self.multi_ball_snd = self.load_sound("multi_ball.wav")
-
+        self.powerup_snd = self.load_sound("powerup.wav", 2)
 
     def load_sound(self, snd_name, vol=1):
         snd = pg.mixer.Sound(path.join(self.snd_dir, snd_name))
@@ -97,6 +97,8 @@ class Game:
         return snd
 
     def new(self):
+        pg.mixer.music.load(path.join(self.snd_dir, "game_music.mp3"))
+        pg.mixer.music.play(loops=-1, fade_ms=2000)
         self.IS_AUTO = False
 
         self.score = 0
@@ -117,6 +119,7 @@ class Game:
         self.player = Player(self)
 
         self.run()
+        pg.mixer.music.fadeout(500)
 
     def run(self):
         self.playing = True
@@ -268,6 +271,7 @@ class Game:
                     self.player.become_bigger()
                 elif hit.collectable_type == "become_smaller":
                     self.player.become_smaller()
+                self.powerup_snd.play()
 
     def rock_collider(self):
         hits = pg.sprite.spritecollide(self.player, self.rocks, True)
@@ -365,6 +369,8 @@ class Game:
         self.wait_for_key_press()
 
     def wait_for_key_press(self):
+        pg.mixer.music.load(path.join(self.snd_dir, "menu_music.mp3"))
+        pg.mixer.music.play(loops=-1, fade_ms=500)
         waiting = True
 
         while waiting:
@@ -377,6 +383,8 @@ class Game:
                 if event.type == pg.KEYUP:
                     if event.key == pg.K_RETURN:
                         waiting = False
+
+        pg.mixer.music.fadeout(500)
 
 
 if __name__ == "__main__":

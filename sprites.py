@@ -132,7 +132,7 @@ class Ball(pg.sprite.Sprite):
 
         self.last_rot_time = 0
         self.rot_wait_time = 25
-        self.rot_speed = 10
+        self.rot_speed = 25
         self.rot_angle = 0
 
     def update(self):
